@@ -1,38 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Github,
   ExternalLink,
   Mail,
   Linkedin,
   Briefcase,
-  PenTool,
+  // PenTool,
   Code,
   Palette,
   Figma,
 } from "lucide-react";
+import ScrollToTop from "../src/components/scrollToTop"; // ייבוא הקובץ
+import { BrowserRouter as Router } from "react-router-dom";
+import Footer from "../src/components/Footer/footer";
 
 // Centralized image configuration
 const siteImages = {
-  profile: "/images/profile.jpg",
+  profile: "/images/me_.jpeg",
   projects: {
-    SuperEZ: [
-      "/images/superEZopenSlide.png",
-      "/videos/SuperEz1.mp4",
-      "/videos/SuperEz2.mp4",
-    ],
-    GetPetMobile: [
-      "/images/1.png",
-      "/images/2.png",
-      "/images/3.png",
-      "/images/4.png",
-      "/images/5.png",
-      "/images/6.png",
-    ],
-    Bono: ["/images/bono.png", "/videos/bonoWebsite.mp4"],
-    IritWebsite: [
-      "/images/IritWebsite.png",
-      "/videos/IritRanCohen.mp4",
-    ],
+    SuperEZ: ["/images/5.png", "/videos/SuperEz1.mp4", "/videos/SuperEz2.mp4"],
+    Tapp: ["/images/3.png", "/videos/Tapp.mp4"],
+    Bono: ["/images/4.png", "/videos/bonoWebsite.mp4"],
+    IritWebsite: ["/images/2.png", "/videos/IritRanCohen.mp4"],
   },
   logos: {
     techStartup: "/images/SuperEZlogo.png",
@@ -55,17 +44,67 @@ interface Project {
   };
 }
 
-interface Logo {
-  title: string;
-  image: string;
-  description: string;
-}
+// interface Logo {
+//   title: string;
+//   image: string;
+//   description: string;
+// }
 
 const projects: Project[] = [
   {
-    title: "Online SuperMarket Platform",
+    title: "Landing Page for Tapp – Interactive Widget Playground",
     description:
-      "A full-stack platform that lets users compare shopping cart prices, including delivery fees, across supermarkets and automatically transfers their cart to the selected supermarket's checkout.",
+      "An interactive landing page showcasing mini-games as home screen widgets. The site features a live widget playground, allowing users to experience real-time interactive widgets with smooth animations. Designed for Tapp, it highlights how the platform enhances user engagement and retention.",
+    media: siteImages.projects.Tapp,
+    tags: [
+      "UI/UX",
+      "React",
+      "Html",
+      "CSS",
+      "TypeScript",
+      "JavaScript",
+      "Node.js",
+    ],
+    links: {
+      Live: "https://www.tappgo.com/",
+    },
+  },
+  {
+    title: "Social Food MarketPlace",
+    description:
+      "Complete FullStack brand identity design including logo, typography, and design system documentation.",
+    media: siteImages.projects.Bono,
+    tags: ["Branding", "UI Design", "Design Systems"],
+    links: {
+      Figma:
+        "https://www.figma.com/design/BK5EoKF9MORGbtBLVB8dCI/Bono-Website?node-id=0-1&t=j5KK8GdWrg5QZY5C-1",
+      Live: "https://www.bonoeat.com/",
+    },
+  },
+  {
+    title: "Fully Designed and Developed Website",
+    description:
+      "A modern Website focused on to convey professionalism with a clean design.",
+    media: siteImages.projects.IritWebsite,
+    tags: [
+      "UI/UX",
+      "React",
+      "Html",
+      "CSS",
+      "TypeScript",
+      "Node.js",
+      "logo",
+      "marketing",
+    ],
+    links: {
+      github: "https://github.com/AdiNehama/irit_rancohen.git",
+      Live: "https://irit-ran-cohen.onrender.com/",
+    },
+  },
+  {
+    title: "Online SuperMarket System",
+    description:
+      "A full-stack system that lets users compare shopping cart prices, including delivery fees, across supermarkets and automatically transfers their cart to the selected supermarket's checkout.",
     media: siteImages.projects.SuperEZ,
     tags: [
       "React",
@@ -84,69 +123,34 @@ const projects: Project[] = [
         "https://www.figma.com/design/hvtMERuXEn6wGSgLbElbLA/SuperEZ?node-id=34-2280&t=zLtRCexOLNgRTois-1",
     },
   },
-  {
-    title: "Mobile Pet Adoption Application",
-    description: "Enables search for pets to adopt by location on the map. ",
-    media: siteImages.projects.GetPetMobile,
-    tags: ["Kotlin", "XML", "Google Maps API", "Firebase"],
-    links: {
-      github: "https://github.com/mayageva11/GetPet.git",
-    },
-  },
-  {
-    title: "Social Food MarketPlace",
-    description:
-      "Complete FullStack brand identity design including logo, typography, and design system documentation.",
-    media: siteImages.projects.Bono,
-    tags: ["Branding", "UI Design", "Design Systems"],
-    links: {
-      Figma:
-        "https://www.figma.com/design/BK5EoKF9MORGbtBLVB8dCI/Bono-Website?node-id=0-1&t=j5KK8GdWrg5QZY5C-1",
-      Live: "https://www.bonoeat.com/",
-    },
-  },
-  {
-    title: "Lawyer Buisness Website",
-    description:
-      "A modern Lawyer Website focused on to convey professionalism with a clean design.",
-    media: siteImages.projects.IritWebsite,
-    tags: ["UI/UX" ,"React",
-      "Html",
-      "CSS",
-      "TypeScript",
-      "Node.js", "logo","marketing"],
-    links: {
-      github: "https://github.com/AdiNehama/irit_rancohen.git",
-      Live:"https://irit-ran-cohen.onrender.com/",
-    },
-  },
 ];
 
-const logos: Logo[] = [
-  {
-    title: "Supermarket Price Comparison Logo",
-    image: siteImages.logos.techStartup,
-    description:
-      "A fun logo in the shape of a shopping cart that aligns with the website's message.",
-  },
-  {
-    title: "Lawyer Brand Logo",
-    image: siteImages.logos.ecoBrand,
-    description:
-      "Official and minimalist logo that conveys representation and professionalism.",
-  },
-  {
-    title: "Pet adoption platform Logo",
-    image: siteImages.logos.fashionBrand,
-    description:
-      "A friendly logo that catches the eye, with soft and pleasant colors.",
-  },
-  {
-    title: "Gaming tech Startup Logo",
-    image: siteImages.logos.foodDelivery,
-    description: "Playful and modern logo for a gaming tech startup.",
-  },
-];
+// const logos: Logo[] = [
+//   {
+//     title: "Supermarket Price Comparison Logo",
+//     image: siteImages.logos.techStartup,
+//     description:
+//       "A fun logo in the shape of a shopping cart that aligns with the website's message.",
+//   },
+//   {
+//     title: "Lawyer Brand Logo",
+//     image: siteImages.logos.ecoBrand,
+//     description:
+//       "Official and minimalist logo that conveys representation and professionalism.",
+//   },
+//   {
+//     title: "Pet adoption platform Logo",
+//     image: siteImages.logos.fashionBrand,
+//     description:
+//       "A friendly logo that catches the eye, with soft and pleasant colors.",
+//   },
+//   {
+//     title: "Gaming tech Startup Logo",
+//     image: siteImages.logos.foodDelivery,
+//     description: "Playful and modern logo for a gaming tech startup.",
+//   },
+// ];
+
 function MediaSlider({ media }: { media: string[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -164,7 +168,7 @@ function MediaSlider({ media }: { media: string[] }) {
         }
       },
       {
-        threshold: 0.2 // Trigger when 20% of the element is visible
+        threshold: 0.2, // Trigger when 20% of the element is visible
       }
     );
 
@@ -188,7 +192,7 @@ function MediaSlider({ media }: { media: string[] }) {
 
     // If the current media is an image, set an interval
     if (!currentMedia.endsWith(".mp4")) {
-      intervalRef.current = setTimeout(nextSlide, 6000);
+      intervalRef.current = setTimeout(nextSlide, 3000);
     }
 
     return () => {
@@ -202,14 +206,16 @@ function MediaSlider({ media }: { media: string[] }) {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + media.length) % media.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + media.length) % media.length
+    );
   };
 
   return (
     <div ref={sliderRef} className="intro-slider relative overflow-hidden">
       <div
         className={`slider flex transition-transform duration-500 ${
-          !isVisible ? 'opacity-0' : 'opacity-100'
+          !isVisible ? "opacity-0" : "opacity-100"
         }`}
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
@@ -270,7 +276,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         }
       },
       {
-        threshold: 0.2 // Trigger when 20% of the element is visible
+        threshold: 0.2, // Trigger when 20% of the element is visible
       }
     );
 
@@ -285,9 +291,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <div
       ref={projectRef}
       className={`bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-1000 transform ${
-        isVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-20"
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
       }`}
       style={{ transitionDelay: `${index * 200}ms` }}
     >
@@ -311,6 +315,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.links.github && (
             <a
               href={project.links.github}
+              target="_blank"
               className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 transition-colors"
             >
               <Github size={20} />
@@ -320,6 +325,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.links.Figma && (
             <a
               href={project.links.Figma}
+              target="_blank"
               className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 transition-colors"
             >
               <Figma size={20} />
@@ -329,6 +335,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.links.Live && (
             <a
               href={project.links.Live}
+              target="_blank"
               className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 transition-colors"
             >
               <ExternalLink size={20} />
@@ -340,7 +347,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     </div>
   );
 }
-
 
 function App() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -364,106 +370,119 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-      {/* Hero Section */}
-      <header className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-purple-50">
-        <div className="container mx-auto px-4 py-16 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-              Developer & Designer
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8">
-              Crafting digital experiences through code and design
-            </p>
-            <div className="flex justify-center gap-4">
-              <a
-                href="https://github.com/AdiNehama"
-                className="text-indigo-600 hover:text-indigo-800 transition-colors"
-              >
-                <Github size={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/adi-nehama-194222253/"
-                className="text-indigo-600 hover:text-indigo-800 transition-colors"
-              >
-                <Linkedin size={24} />
-              </a>
-              <a
-                href="mailto:adinehama6@gmail.com"
-                className="text-indigo-600 hover:text-indigo-800 transition-colors"
-              >
-                <Mail size={24} />
-              </a>
+    <Router>
+      <ScrollToTop />
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+        {/* Hero Section */}
+        <header className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-purple-50">
+          <div className="container mx-auto px-4 py-16 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                {" "}
+                Full-Stack Developer{" "}
+              </h1>
+
+              <p className="text-xl md:text-2xl text-gray-600 mb-8">
+                Crafting digital experiences and professional websites through
+                code and design
+              </p>
+              <div className="flex justify-center gap-4">
+                <a
+                  href="https://github.com/AdiNehama"
+                  target="_blank"
+                  className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                >
+                  <Github size={24} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/adi-nehama-194222253/"
+                  target="_blank"
+                  className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                >
+                  <Linkedin size={24} />
+                </a>
+                <a
+                  href="mailto:adinehama6@gmail.com"
+                  target="_blank"
+                  className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                >
+                  <Mail size={24} />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </header>
-      {/* About Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="hidden-element opacity-0 translate-y-10 transition-all duration-700">
-              <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-                About Me
-              </h2>
-              <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="w-48 h-48 relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse group-hover:animate-none transition-all duration-300"></div>
-                  <div className="absolute inset-1 bg-white rounded-full"></div>
-                  <img
-                    src={siteImages.profile}
-                    alt="Adi"
-                    className="absolute inset-2 rounded-full object-cover w-[calc(100%-16px)] h-[calc(100%-16px)] group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="flex-1">
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Hey there! Thank you for visiting my website :)
-                    <br /> My name is Adi Nehama, and I'm a passionate developer
-                    and designer with a keen eye for detail and a love for
-                    crafting beautiful, functional digital experiences. With a
-                    bachelor's degree in Computer Science and a background in
-                    design, I bring a unique perspective to every project
-                    combining technical expertise with creative vision.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center gap-2 p-3 rounded-lg bg-indigo-50">
-                      <Code size={20} className="text-indigo-600" />
-                      <span className="text-indigo-600">Development</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-3 rounded-lg bg-purple-50">
-                      <Palette size={20} className="text-purple-600" />
-                      <span className="text-purple-600">UI/UX Design</span>
+        </header>
+        {/* About Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="hidden-element opacity-0 translate-y-10 transition-all duration-700">
+                <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+                  About Me
+                </h2>
+                <div className="flex flex-col md:flex-row gap-8 items-center">
+                  <div className="w-48 h-48 relative group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse group-hover:animate-none transition-all duration-300"></div>
+                    <div className="absolute inset-1 bg-white rounded-full"></div>
+                    <img
+                      src={siteImages.profile}
+                      alt="Adi"
+                      className="absolute inset-2 rounded-full object-cover w-[calc(100%-16px)] h-[calc(100%-16px)] group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-600 leading-relaxed mb-6">
+                      Hey there! Thank you for visiting my protfolio :)
+                      <br /> My name is Adi Nehama, and I'm a passionate
+                      full-stack developer and designer with a keen eye for
+                      detail and a love for crafting beautiful, functional
+                      digital experiences. With a bachelor's degree in Computer
+                      Science and a background in design, I bring a unique
+                      perspective to every project combining technical expertise
+                      with creative vision.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex items-center gap-2 p-3 rounded-lg bg-indigo-50">
+                        <Code size={20} className="text-indigo-600" />
+                        <span className="text-indigo-600">Development</span>
+                      </div>
+                      <div className="flex items-center gap-2 p-3 rounded-lg bg-purple-50">
+                        <Palette size={20} className="text-purple-600" />
+                        <span className="text-purple-600">UI/UX Design</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Projects Section */}
-      <section className="py-20 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-    <div className="container mx-auto px-4">
-      <div className="flex items-center gap-2 justify-center mb-2">
-        <Briefcase size={24} className="text-indigo-600" />
-        <h2 className="text-4xl font-bold text-center text-gray-800">
-          Featured Projects
-        </h2>
-      </div>
-      <p className="text-gray-600 text-center mb-12">
-        Some of my recent development work
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-5xl mx-auto">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.title} project={project} index={index} />
-        ))}
-      </div>
-    </div>
-  </section>
-      {/* Logo Design Section */}
-      <section className="py-20 bg-white">
+        {/* Projects Section */}
+        <section className="py-20 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center gap-2 justify-center mb-2">
+              <Briefcase size={24} className="text-indigo-600" />
+              <h2 className="text-4xl font-bold text-center text-gray-800">
+                Featured Projects
+              </h2>
+            </div>
+            <p className="text-gray-600 text-center mb-12">
+              Some of my recent development work
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-5xl mx-auto">
+              {projects.map((project, index) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  index={index}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* Logo Design Section */}
+        {/* <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-2 justify-center mb-2">
             <PenTool size={24} className="text-purple-600" />
@@ -497,8 +516,10 @@ function App() {
             ))}
           </div>
         </div>
-      </section>
-    </div>
+      </section> */}
+      </div>
+      <Footer />
+    </Router>
   );
 }
 
