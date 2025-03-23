@@ -20,7 +20,7 @@ const siteImages = {
     SuperEZ: ["/images/5.png", "/videos/SuperEz1.mp4", "/videos/SuperEz2.mp4"],
     Tapp: ["/images/3.png", "/videos/Tapp.mp4"],
     Bono: ["/images/4.png", "/videos/bonoWebsite.mp4"],
-    IritWebsite: ["/images/2.png", "/videos/IritRanCohen.mp4"],
+    IritWebsite: ["/images/2.png", "/videos/eli.mp4"],
   },
   logos: {
     techStartup: "/images/SuperEZlogo.png",
@@ -89,8 +89,7 @@ const projects: Project[] = [
       "marketing",
     ],
     links: {
-      github: "https://github.com/AdiNehama/irit_rancohen.git",
-      Live: "https://irit-ran-cohen.onrender.com/",
+      Live: "https://eli-m40t.onrender.com/",
     },
   },
   {
@@ -165,7 +164,9 @@ function MediaSlider({ media }: { media: string[] }) {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + media.length) % media.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + media.length) % media.length
+    );
   };
 
   return (
@@ -252,7 +253,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     >
       <MediaSlider media={project.media} />
       <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 text-gray-800">{project.title}</h3>
+        <h3 className="text-xl font-bold mb-2 text-gray-800">
+          {project.title}
+        </h3>
         <p className="text-gray-600 mb-4">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag, tagIndex) => (
@@ -381,7 +384,10 @@ function App() {
                 <p className="text-gray-600 leading-relaxed mb-8">
                   Hey there! Thank you for visiting my portfolio :)
                   <br />
-                  I'm Adi Nehama, a full-stack developer and designer with a Computer Science degree, blending technical expertise with creative vision to craft beautiful, functional digital experiences.
+                  I'm Adi Nehama, a full-stack developer and designer with a
+                  Computer Science degree, blending technical expertise with
+                  creative vision to craft beautiful, functional digital
+                  experiences.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center gap-2 p-3 rounded-lg bg-indigo-50">
@@ -412,7 +418,11 @@ function App() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-5xl mx-auto">
               {projects.map((project, index) => (
-                <ProjectCard key={project.title} project={project} index={index} />
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  index={index}
+                />
               ))}
             </div>
           </div>
