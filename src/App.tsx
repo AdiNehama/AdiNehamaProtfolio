@@ -18,7 +18,7 @@ const siteImages = {
   profile: "/images/me_.jpeg",
   projects: {
     SuperEZ: ["/images/5.png", "/videos/SuperEz1.mp4", "/videos/SuperEz2.mp4"],
-    Tapp: ["/images/3.png", "/videos/Tapp.mp4"],
+    Tapp: ["/images/3.png", "/videos/Tapp1.mp4"],
     Bono: ["/images/4.png", "/videos/bonoWebsite.mp4"],
     IritWebsite: ["/images/2.png", "/videos/eli.mp4"],
   },
