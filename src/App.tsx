@@ -336,7 +336,7 @@ function App() {
               {/* Left side - Title */}
               <div className="text-left space-y-8">
                 <h1 className="text-3xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 leading-tight">
-                  Full-Stack Developer
+                  Product Designer
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-600">
                   Crafting digital experiences and professional websites through
